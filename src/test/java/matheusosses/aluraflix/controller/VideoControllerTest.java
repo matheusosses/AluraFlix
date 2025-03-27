@@ -1,6 +1,6 @@
 package matheusosses.aluraflix.controller;
 
-import matheusosses.aluraflix.dto.VideoDto;
+import matheusosses.aluraflix.dto.video.VideoDto;
 import matheusosses.aluraflix.exception.ValidacaoException;
 import matheusosses.aluraflix.service.VideoService;
 import org.junit.jupiter.api.DisplayName;

@@ -2,10 +2,8 @@ package matheusosses.aluraflix.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import matheusosses.aluraflix.dto.AtualizacaoVideoDTO;
-import matheusosses.aluraflix.dto.CadastroVideoDTO;
-import matheusosses.aluraflix.dto.VideoDto;
-import org.springframework.stereotype.Service;
+import matheusosses.aluraflix.dto.video.AtualizacaoVideoDTO;
+import matheusosses.aluraflix.dto.video.CadastroVideoDTO;
 
 import java.util.Optional;
 

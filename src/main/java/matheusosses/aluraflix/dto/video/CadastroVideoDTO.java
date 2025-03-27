@@ -1,4 +1,4 @@
-package matheusosses.aluraflix.dto;
+package matheusosses.aluraflix.dto.video;
 
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;

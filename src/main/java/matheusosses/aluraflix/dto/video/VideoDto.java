@@ -1,4 +1,4 @@
-package matheusosses.aluraflix.dto;
+package matheusosses.aluraflix.dto.video;
 
 import matheusosses.aluraflix.model.Video;
 

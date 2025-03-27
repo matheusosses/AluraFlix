@@ -1,8 +1,8 @@
 package matheusosses.aluraflix.service;
 
-import matheusosses.aluraflix.dto.AtualizacaoVideoDTO;
-import matheusosses.aluraflix.dto.CadastroVideoDTO;
-import matheusosses.aluraflix.dto.VideoDto;
+import matheusosses.aluraflix.dto.video.AtualizacaoVideoDTO;
+import matheusosses.aluraflix.dto.video.CadastroVideoDTO;
+import matheusosses.aluraflix.dto.video.VideoDto;
 import matheusosses.aluraflix.exception.ValidacaoException;
 import matheusosses.aluraflix.model.Video;
 import matheusosses.aluraflix.repository.VideoRepository;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class VideoService {
