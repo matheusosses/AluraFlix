@@ -25,6 +25,8 @@ public class Categoria {
 
     private String cor;
 
+    private boolean ativo;
+
     public Categoria(CadastroCategoriaDto dto) {
         this.titulo = dto.titulo();
         this.cor = dto.cor();
@@ -33,5 +35,9 @@ public class Categoria {
     public void atualizar(AtualizacaoCategoriaDto dto) {
         this.titulo = Optional.ofNullable(dto.titulo()).orElse(titulo);
         this.cor = Optional.ofNullable(dto.cor()).orElse(cor);
+    }
+
+    public void inativar(){
+        this.ativo = false ;
     }
 }

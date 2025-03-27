@@ -39,4 +39,10 @@ public class CategoriaController {
     public ResponseEntity<CategoriaDto> atualizarCategoria(@RequestBody @Valid AtualizacaoCategoriaDto dto, @PathVariable Long id) {
         return ResponseEntity.ok(service.atualizarCategoria(id, dto));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> removerCategoria(@PathVariable Long id) {
+        service.inativarCategoria(id);
+        return ResponseEntity.ok("Categoria removida com sucesso!");
+    }
 }

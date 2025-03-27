@@ -50,4 +50,11 @@ public class CategoriaService {
         repository.save(categoria);
         return new CategoriaDto(categoria);
     }
+
+    @Transactional
+    public void inativarCategoria(Long id) {
+        Categoria categoria = repository.findById(id).orElseThrow(() -> new ValidacaoException("Nao há categoria com id fornecido"));
+        categoria.inativar();
+        repository.save(categoria);
+    }
 }
