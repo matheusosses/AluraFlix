@@ -1,12 +1,12 @@
 package matheusosses.aluraflix.controller;
 
+import jakarta.validation.Valid;
+import matheusosses.aluraflix.dto.categoria.AtualizacaoCategoriaDto;
+import matheusosses.aluraflix.dto.categoria.CadastroCategoriaDto;
 import matheusosses.aluraflix.dto.categoria.CategoriaDto;
 import matheusosses.aluraflix.service.CategoriaService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +28,15 @@ public class CategoriaController {
     @GetMapping("/{id}")
     public ResponseEntity<CategoriaDto> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarporId(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<CategoriaDto> cadastrarCategoria(@RequestBody @Valid CadastroCategoriaDto dto){
+        return ResponseEntity.ok(service.cadastrarCategoria(dto));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoriaDto> atualizarCategoria(@RequestBody @Valid AtualizacaoCategoriaDto dto, @PathVariable Long id) {
+        return ResponseEntity.ok(service.atualizarCategoria(id, dto));
     }
 }
