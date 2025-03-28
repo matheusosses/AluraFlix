@@ -4,20 +4,25 @@ import matheusosses.aluraflix.dto.video.AtualizacaoVideoDTO;
 import matheusosses.aluraflix.dto.video.CadastroVideoDTO;
 import matheusosses.aluraflix.dto.video.VideoDto;
 import matheusosses.aluraflix.exception.ValidacaoException;
+import matheusosses.aluraflix.model.Categoria;
 import matheusosses.aluraflix.model.Video;
+import matheusosses.aluraflix.repository.CategoriaRepository;
 import matheusosses.aluraflix.repository.VideoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VideoService {
 
     private final VideoRepository videoRepository;
+    private final CategoriaRepository categoriaRepository;
 
-    public VideoService(VideoRepository videoRepository) {
+    public VideoService(VideoRepository videoRepository, CategoriaRepository categoriaRepository) {
         this.videoRepository = videoRepository;
+        this.categoriaRepository = categoriaRepository;
     }
 
     public List<VideoDto> listarVideos() {
@@ -34,7 +39,10 @@ public class VideoService {
 
     @Transactional
     public VideoDto cadastrarVideo(CadastroVideoDTO dto) {
-        Video video = new Video(dto);
+        var id = Optional.ofNullable(dto.categoriaId()).orElse(1L);
+
+        Categoria categoria = categoriaRepository.getReferenceById(id);
+        Video video = new Video(dto, categoria);
         videoRepository.save(video);
         return new VideoDto(video);
     }
@@ -47,9 +55,16 @@ public class VideoService {
 
     @Transactional
     public VideoDto atualizarVideo(Long id, AtualizacaoVideoDTO dto) {
-        Video video = videoRepository.findById(id).orElseThrow(() -> new ValidacaoException("Nenhum id encontrado"));;
+        Video video = videoRepository.findById(id).orElseThrow(() -> new ValidacaoException("Nenhum id encontrado"));
+        Categoria categoria;
 
-        video.atualizar(dto);
+        if(dto.categoriaId() != null) {
+            categoria = categoriaRepository.findById(dto.categoriaId()).orElseThrow(() -> new ValidacaoException("Nenhuma categoria encontrado"));
+        } else {
+            categoria = null;
+        }
+
+        video.atualizar(dto, categoria);
         videoRepository.save(video);
         return new VideoDto(video);
     }

@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import matheusosses.aluraflix.dto.categoria.AtualizacaoCategoriaDto;
 import matheusosses.aluraflix.dto.categoria.CadastroCategoriaDto;
 import matheusosses.aluraflix.dto.categoria.CategoriaDto;
+import matheusosses.aluraflix.dto.video.VideoDto;
 import matheusosses.aluraflix.service.CategoriaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +45,10 @@ public class CategoriaController {
     public ResponseEntity<String> removerCategoria(@PathVariable Long id) {
         service.inativarCategoria(id);
         return ResponseEntity.ok("Categoria removida com sucesso!");
+    }
+
+    @GetMapping("/{id}/videos")
+    public ResponseEntity<List<VideoDto>> listarVideosPorCategoria(@PathVariable Long id) {
+        return ResponseEntity.ok(service.listarPorCategoria(id));
     }
 }

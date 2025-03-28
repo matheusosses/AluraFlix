@@ -40,7 +40,7 @@ class VideoControllerTest {
                 }
                 """;
 
-    private final VideoDto dto = new VideoDto("teste", "teste", "https://example.net/");
+    private final VideoDto dto = new VideoDto("teste", "teste", "https://example.net/", 1L);
 
     @Test
     @DisplayName("Deveria retornar codigo 400 quando cadastrar videos com informações invalidas")
@@ -66,7 +66,8 @@ class VideoControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.titulo").value("teste"))
                 .andExpect(jsonPath("$.descricao").value("teste"))
-                .andExpect(jsonPath("$.url").value("https://example.net/"));
+                .andExpect(jsonPath("$.url").value("https://example.net/"))
+                .andExpect(jsonPath("$.categoriaId").value(1L));
 
 
     }
@@ -84,7 +85,7 @@ class VideoControllerTest {
     void cenario4() throws Exception {
         List<VideoDto> dtoList = new ArrayList<>();
         dtoList.add(dto);
-        dtoList.add(new VideoDto("teste2", "teste2", "https://example.net/2"));
+        dtoList.add(new VideoDto("teste2", "teste2", "https://example.net/2", 1L));
 
         when(service.listarVideos()).thenReturn(dtoList);
 
@@ -93,9 +94,12 @@ class VideoControllerTest {
                 .andExpect(jsonPath("$[0].titulo").value("teste"))
                 .andExpect(jsonPath("$[0].descricao").value("teste"))
                 .andExpect(jsonPath("$[0].url").value("https://example.net/"))
+                .andExpect(jsonPath("$[0].categoriaId").value(1L))
                 .andExpect(jsonPath("$[1].titulo").value("teste2"))
                 .andExpect(jsonPath("$[1].descricao").value("teste2"))
-                .andExpect(jsonPath("$[1].url").value("https://example.net/2"));
+                .andExpect(jsonPath("$[1].url").value("https://example.net/2"))
+                .andExpect(jsonPath("$[1].categoriaId").value(1L));
+
 
     }
 
@@ -116,7 +120,8 @@ class VideoControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.titulo").value("teste"))
                 .andExpect(jsonPath("$.descricao").value("teste"))
-                .andExpect(jsonPath("$.url").value("https://example.net/"));
+                .andExpect(jsonPath("$.url").value("https://example.net/"))
+                .andExpect(jsonPath("$.categoriaId").value(1L));
     }
 
     @Test
@@ -141,6 +146,7 @@ class VideoControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.titulo").value("teste"))
                 .andExpect(jsonPath("$.descricao").value("teste"))
-                .andExpect(jsonPath("$.url").value("https://example.net/"));
+                .andExpect(jsonPath("$.url").value("https://example.net/"))
+                .andExpect(jsonPath("$.categoriaId").value(1L));
     }
 }

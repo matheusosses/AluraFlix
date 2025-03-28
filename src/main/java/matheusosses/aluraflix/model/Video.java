@@ -14,11 +14,11 @@ import java.util.Optional;
 @Getter
 public class Video {
 
-    public Video(CadastroVideoDTO dto) {
+    public Video(CadastroVideoDTO dto, Categoria categoria) {
         this.descricao = dto.descricao();
         this.titulo = dto.titulo();
         this.url = dto.url();
-        this.ativo = true;
+        this.categoria = categoria;
     }
 
     @Id
@@ -31,12 +31,16 @@ public class Video {
 
     private String url;
 
+    @ManyToOne
+    private Categoria categoria;
+
     private boolean ativo;
 
-    public void atualizar(AtualizacaoVideoDTO dto) {
+    public void atualizar(AtualizacaoVideoDTO dto, Categoria categoria) {
         this.titulo = Optional.ofNullable(dto.titulo()).orElse(titulo);
         this.descricao = Optional.ofNullable(dto.descricao()).orElse(descricao);
         this.url = Optional.ofNullable(dto.url()).orElse(url);
+        this.categoria = Optional.ofNullable(categoria).orElse(this.categoria);
     }
 
     public void inativar() {

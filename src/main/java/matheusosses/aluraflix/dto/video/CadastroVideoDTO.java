@@ -12,5 +12,7 @@ public record CadastroVideoDTO(
 
         @NotBlank
         @URL
-        String url) {
+        String url,
+
+        Long categoriaId) {
 }

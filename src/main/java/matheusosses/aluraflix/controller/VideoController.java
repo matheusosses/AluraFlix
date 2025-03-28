@@ -20,7 +20,7 @@ public class VideoController {
     }
 
     @PostMapping
-    public ResponseEntity<VideoDto> criarVideo(@RequestBody @Valid CadastroVideoDTO dto){
+    public ResponseEntity<VideoDto> cadastrarVideo(@RequestBody @Valid CadastroVideoDTO dto){
         return ResponseEntity.ok(service.cadastrarVideo(dto));
     }
 

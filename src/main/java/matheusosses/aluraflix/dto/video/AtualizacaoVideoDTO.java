@@ -1,5 +1,6 @@
 package matheusosses.aluraflix.dto.video;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.URL;
 
@@ -10,5 +11,7 @@ public record AtualizacaoVideoDTO(
 
         @URL
         @Size(min = 1, max = 350)
-        String url) {
+        String url,
+
+        Long categoriaId) {
 }
