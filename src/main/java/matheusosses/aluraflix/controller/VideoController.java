@@ -1,6 +1,7 @@
 package matheusosses.aluraflix.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import matheusosses.aluraflix.dto.video.AtualizacaoVideoDTO;
 import matheusosses.aluraflix.dto.video.CadastroVideoDTO;
 import matheusosses.aluraflix.dto.video.VideoDto;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/videos")
+@RequestMapping("/videos/")
 public class VideoController {
     private final VideoService service;
 
@@ -29,19 +30,24 @@ public class VideoController {
         return ResponseEntity.ok(service.listarVideos());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<VideoDto> buscarPorId(@PathVariable Long id){
         return ResponseEntity.ok(service.buscarPorId(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<VideoDto> atualizarVideo(@RequestBody @Valid AtualizacaoVideoDTO dto, @PathVariable Long id){
         return ResponseEntity.ok(service.atualizarVideo(id, dto));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<String> deletarVideo(@PathVariable Long id){
         service.deletarVideo(id);
         return ResponseEntity.ok("Video deletado com sucesso!");
+    }
+
+    @GetMapping(params = "search")
+    public ResponseEntity<List<VideoDto>> buscarPortitulo(@RequestParam @NotBlank String search){
+        return ResponseEntity.ok(service.buscarPorTitulo(search));
     }
 }

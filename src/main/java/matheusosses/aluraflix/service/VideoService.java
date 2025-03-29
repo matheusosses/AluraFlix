@@ -39,7 +39,7 @@ public class VideoService {
 
     @Transactional
     public VideoDto cadastrarVideo(CadastroVideoDTO dto) {
-        var id = Optional.ofNullable(dto.categoriaId()).orElse(1L);
+        var id = Optional.ofNullable(dto.categoria()).orElse(1L);
 
         Categoria categoria = categoriaRepository.getReferenceById(id);
         Video video = new Video(dto, categoria);
@@ -58,8 +58,8 @@ public class VideoService {
         Video video = videoRepository.findById(id).orElseThrow(() -> new ValidacaoException("Nenhum id encontrado"));
         Categoria categoria;
 
-        if(dto.categoriaId() != null) {
-            categoria = categoriaRepository.findById(dto.categoriaId()).orElseThrow(() -> new ValidacaoException("Nenhuma categoria encontrado"));
+        if(dto.categoria() != null) {
+            categoria = categoriaRepository.findById(dto.categoria()).orElseThrow(() -> new ValidacaoException("Nenhuma categoria encontrado"));
         } else {
             categoria = null;
         }
@@ -75,5 +75,17 @@ public class VideoService {
 
         video.inativar();
         videoRepository.save(video);
+    }
+
+    public List<VideoDto> buscarPorTitulo(String search) {
+        List<Video> videos = videoRepository.buscarPorTitulo(search);
+
+        if (videos.isEmpty()) {
+            throw new ValidacaoException("Nenhum video encontrado");
+        }
+
+        return videos.stream()
+                .map(VideoDto::new)
+                .toList();
     }
 }

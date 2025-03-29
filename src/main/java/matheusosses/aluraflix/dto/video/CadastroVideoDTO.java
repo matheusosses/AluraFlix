@@ -14,5 +14,5 @@ public record CadastroVideoDTO(
         @URL
         String url,
 
-        Long categoriaId) {
+        Long categoria) {
 }

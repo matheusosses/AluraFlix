@@ -1,10 +1,13 @@
 package matheusosses.aluraflix.exception;
 
+import jakarta.validation.ValidationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
 import java.util.NoSuchElementException;
 
@@ -25,4 +28,20 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> validException(MethodArgumentNotValidException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Dados inválidos para a requisição");
     }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> dataIntegrityViolationException (DataIntegrityViolationException ex){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não há categoria com esse id");
+    }
+
+    @ExceptionHandler(CadastroCategoriaException.class)
+    public ResponseEntity<String> cadastroCategoriaException (CadastroCategoriaException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<String> handlerMethodValidationException (HandlerMethodValidationException ex){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O campo search não pode ser nulo ou vazio");
+    }
+
 }

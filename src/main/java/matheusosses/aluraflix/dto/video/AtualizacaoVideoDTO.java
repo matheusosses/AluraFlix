@@ -13,5 +13,5 @@ public record AtualizacaoVideoDTO(
         @Size(min = 1, max = 350)
         String url,
 
-        Long categoriaId) {
+        Long categoria) {
 }

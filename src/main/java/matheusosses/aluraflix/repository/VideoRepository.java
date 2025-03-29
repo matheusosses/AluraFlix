@@ -14,4 +14,7 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
 
     @Query("SELECT v FROM Video v JOIN v.categoria c WHERE v.ativo = true and c.id = :id ORDER BY c.id")
     List<Video> listarPorCategoria(Long id);
+
+    @Query("SELECT v FROM Video v WHERE LOWER(v.titulo) LIKE LOWER(CONCAT('%',:search,'%'))")
+    List<Video> buscarPorTitulo(String search);
 }
