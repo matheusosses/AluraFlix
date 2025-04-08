@@ -50,6 +50,7 @@ public class VideoService {
 
     public VideoDto buscarPorId(Long id) {
         Video video = videoRepository.findById(id).orElseThrow(() -> new ValidacaoException("Nenhum id encontrado"));
+
         return new VideoDto(video);
     }
 

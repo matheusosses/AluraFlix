@@ -6,6 +6,7 @@ import matheusosses.aluraflix.dto.video.AtualizacaoVideoDTO;
 import matheusosses.aluraflix.dto.video.CadastroVideoDTO;
 import matheusosses.aluraflix.dto.video.VideoDto;
 import matheusosses.aluraflix.service.VideoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

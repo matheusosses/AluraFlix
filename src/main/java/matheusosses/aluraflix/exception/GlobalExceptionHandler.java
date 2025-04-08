@@ -1,6 +1,5 @@
 package matheusosses.aluraflix.exception;
 
-import jakarta.validation.ValidationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +42,4 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handlerMethodValidationException (HandlerMethodValidationException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O campo search não pode ser nulo ou vazio");
     }
-
 }
